@@ -7,6 +7,9 @@ import http from 'https://unpkg.com/isomorphic-git@beta/http/web/index.js'
 // our request handler on "fetch" events.
 addEventListener("fetch", (event) => {
     event.respondWith(handleRequest(event.request));
+
+
+
 });
 
 async function handleRequest(request) {
@@ -44,11 +47,13 @@ async function handleRequest(request) {
     if (contentType.includes("application/json")) {
         const json = await request.json();
         return new Response(JSON.stringify({ json }, null, 2), responseInit);
-
-
     }
 
-    return new Response(null, {
+    const fs = new LightningFS('fs')
+    const dir = '/test-clone'
+    git.clone({ fs, http, dir, url: 'https://github.com/isomorphic-git/lightning-fs', corsProxy: 'https://cors.isomorphic-git.org' }).then(console.log)
+
+    return new Response("HEIIIIII", {
         status: 415,
         statusText: "Unsupported Media Type",
     });
