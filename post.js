@@ -53,8 +53,8 @@ async function handleRequest(request) {
     const dir = '/test-clone'
     let log = await git.clone({ fs, http, dir, url: 'https://github.com/isomorphic-git/lightning-fs', corsProxy: 'https://cors.isomorphic-git.org' })
     return new Response(log, {
-        status: 415,
-        statusText: "Unsupported Media Type",
+        status: 200,
+        // statusText: "Unsupported Media Type",
     });
 
     // // Handle form data.
